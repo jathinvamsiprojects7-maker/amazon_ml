@@ -88,6 +88,7 @@ def main() -> None:
     ap.add_argument("--max-df", type=int, default=None)
     ap.add_argument("--bucket-cap", type=int, default=None)
     ap.add_argument("--chunk", type=int, default=20000)
+    ap.add_argument("--index-batch", type=int, default=500_000)
     ap.add_argument("--workers", type=int, default=0)
     ap.add_argument("--limit", type=int, default=0)
     ap.add_argument("--force", action="store_true")
@@ -151,9 +152,11 @@ def main() -> None:
     ix_d = PostingIndex.from_column(src_path, "address_dig")
     token_idx = [
         RareTokenIndex.build_or_load(src_path, "name_norm",
-                                    budget.max_token_df, idx_cache),
+                                    budget.max_token_df, idx_cache,
+                                    batch_size=args.index_batch),
         RareTokenIndex.build_or_load(src_path, "address_norm",
-                                    budget.max_token_df, idx_cache),
+                                    budget.max_token_df, idx_cache,
+                                    batch_size=args.index_batch),
     ]
     print(f"[indexes] ready in {time.perf_counter() - t0:.0f}s | {g.status()}",
           flush=True)

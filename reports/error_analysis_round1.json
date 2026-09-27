@@ -1,0 +1,587 @@
+{
+  "fp_count": 229,
+  "fn_count": 1140292,
+  "fp_types": {
+    "same_name_diff_addr": 37,
+    "high_similarity": 163,
+    "same_addr_diff_name": 29
+  },
+  "fn_types": {
+    "retrieval_failure": 1140103,
+    "threshold_too_high": 189
+  },
+  "fp_examples": [
+    {
+      "s1_id": "S1-354301488",
+      "cand_id": "S2-962873693",
+      "score": 0.8841,
+      "s1_name": "dynamic unified strategy inc",
+      "cand_name": "dynamic unified strategy inc",
+      "s1_addr": "38 r street washington dc",
+      "cand_addr": "clarita street e saint louis il"
+    },
+    {
+      "s1_id": "S1-141278611",
+      "cand_id": "S3-914897360",
+      "score": 0.9952,
+      "s1_name": "compass llc",
+      "cand_name": "compass llc",
+      "s1_addr": "820 center street unit 2 provo ut",
+      "cand_addr": "521a center street unit 20 ludlow massachusetts"
+    },
+    {
+      "s1_id": "S1-536626080",
+      "cand_id": "S2-17072466",
+      "score": 0.9263,
+      "s1_name": "perfect trading",
+      "cand_name": "\u0938\u093f\u0932\u094d\u0935\u0930 \u0915\u0902\u0938\u0932\u094d\u091f\u093f\u0902\u0917",
+      "s1_addr": "a102 kalpana complex coop housing society ltd vasai thane maharashtra",
+      "cand_addr": "pune maharashtra b102"
+    },
+    {
+      "s1_id": "S1-87702457",
+      "cand_id": "S2-652189454",
+      "score": 0.9957,
+      "s1_name": "dvp services private limited",
+      "cand_name": "\u0915\u0943\u0937\u094d\u0923\u093e \u092a\u094d\u0930\u094b\u0921\u094d\u092f\u0942\u0938\u0930 \u092a\u094d\u0930\u093e \u0932\u093f",
+      "s1_addr": "flat no 101 104 shop no 103 ashdip chhatrapati shivaji marg opp vijay sales mira roa d east thane maharashtra",
+      "cand_addr": "flat no 101 104 shop no 103 ashdip chhatrapati shivaji marg opp vijay sales mira roa d east thane maharashtra"
+    },
+    {
+      "s1_id": "S1-87702457",
+      "cand_id": "S3-510372352",
+      "score": 0.9935,
+      "s1_name": "dvp services private limited",
+      "cand_name": "\u0915\u0943\u0937\u094d\u0923\u093e \u092a\u094d\u0930\u094b\u0921\u094d\u092f\u0942\u0938\u0930 \u092a\u094d\u0930\u093e \u0932\u093f",
+      "s1_addr": "flat no 101 104 shop no 103 ashdip chhatrapati shivaji marg opp vijay sales mira roa d east thane maharashtra",
+      "cand_addr": "flat no 101 104 shop no 103 ashdip chhatrapati shivaji marg opp vijay sales mira roa d east thane mh"
+    },
+    {
+      "s1_id": "S1-242736881",
+      "cand_id": "S2-295887595",
+      "score": 0.9776,
+      "s1_name": "polaris",
+      "cand_name": "polaris",
+      "s1_addr": "121 christopher drive clovis nm",
+      "cand_addr": "121 mallard creek drive grahham nc"
+    },
+    {
+      "s1_id": "S1-842508565",
+      "cand_id": "S2-830398566",
+      "score": 0.8847,
+      "s1_name": "prashant solutions private limited",
+      "cand_name": "\u0907\u0902\u091f\u0930\u0928\u0947\u0936\u0928\u0932 \u0907\u0928\u094d\u0935\u0947\u0938\u094d\u091f\u092e\u0947\u0902\u091f \u091f\u094d\u0930\u0947\u0921\u093f\u0902\u0917 \u090f\u0932\u090f\u0932\u092a\u0940",
+      "s1_addr": "s54 f f greater kailashii new delhi south delhi delhi",
+      "cand_addr": "d54 d south west delhi delhi"
+    },
+    {
+      "s1_id": "S1-860707864",
+      "cand_id": "S2-41824750",
+      "score": 0.9999,
+      "s1_name": "sherman complete vision center clinic",
+      "cand_name": "olson complete vision center clinic",
+      "s1_addr": "16720 edward doub road williamsport md",
+      "cand_addr": "16720d edward doub road williamsport md"
+    },
+    {
+      "s1_id": "S1-745155242",
+      "cand_id": "S2-298794839",
+      "score": 0.9301,
+      "s1_name": "dtw sterling airport",
+      "cand_name": "hughes sterling",
+      "s1_addr": "893 erskine street al montgomery",
+      "cand_addr": "893 erskine street montgomey al"
+    },
+    {
+      "s1_id": "S1-22033775",
+      "cand_id": "S2-223901837",
+      "score": 0.9276,
+      "s1_name": "green tove j md",
+      "cand_name": "5corners",
+      "s1_addr": "615 jonette avenue bradley il",
+      "cand_addr": "615 jonette avenue bradley il"
+    },
+    {
+      "s1_id": "S1-401372098",
+      "cand_id": "S3-798905858",
+      "score": 0.9991,
+      "s1_name": "apex inc",
+      "cand_name": "apex inc",
+      "s1_addr": "108 richardson street bethany wv",
+      "cand_addr": "108 3rd street towanda kansas"
+    },
+    {
+      "s1_id": "S1-339412036",
+      "cand_id": "S2-863936022",
+      "score": 0.8591,
+      "s1_name": "bright consultants private limited",
+      "cand_name": "\u0917\u0941\u091c\u0930\u093e\u0924 \u0932\u0949\u091c\u093f\u0938\u094d\u091f\u093f\u0915\u094d\u0938 \u092a\u094d\u0930\u093e\u0907\u0935\u0947\u091f \u0932\u093f\u092e\u093f\u091f\u0947\u0921",
+      "s1_addr": "sinnar nashik plot no b 85 midc malegao sinnar nashik maharashtra",
+      "cand_addr": "a85 sangli maharashtra"
+    },
+    {
+      "s1_id": "S1-512939885",
+      "cand_id": "S3-945021844",
+      "score": 0.9562,
+      "s1_name": "lotus iq llp",
+      "cand_name": "verayumanyla",
+      "s1_addr": "207 maharshi debendra road 4th floor room no 73a kolkata kolkata howrah west bengal",
+      "cand_addr": "207 maharshi devendra road 4th floor room no 73a kolkata kolkata howrah west bengal"
+    },
+    {
+      "s1_id": "S1-512939885",
+      "cand_id": "S3-858744787",
+      "score": 0.9427,
+      "s1_name": "lotus iq llp",
+      "cand_name": "sf",
+      "s1_addr": "207 maharshi debendra road 4th floor room no 73a kolkata kolkata howrah west bengal",
+      "cand_addr": "207 maharshi debendra rd 4th floor room no 73a kolkata kolkata howrah west bengal"
+    },
+    {
+      "s1_id": "S1-512939885",
+      "cand_id": "S2-582819546",
+      "score": 0.916,
+      "s1_name": "lotus iq llp",
+      "cand_name": "\u09b8 \u0989\u09a6 \u09b0 \u09a8 \u09ab \u0987\u09a8 \u09af \u09a8 \u09b8 \u09b2 \u09ae \u099f \u09a1",
+      "s1_addr": "207 maharshi debendra road 4th floor room no 73a kolkata kolkata howrah west bengal",
+      "cand_addr": "207 maharshi debendra rd 4th floor room no 73a kolkata kolkata howrah west bengal"
+    },
+    {
+      "s1_id": "S1-220643930",
+      "cand_id": "S2-22339803",
+      "score": 0.8774,
+      "s1_name": "sweet diner",
+      "cand_name": "sweet diner",
+      "s1_addr": "8795 marilyn drive frisco tx",
+      "cand_addr": "monterrey drive alvarado tx"
+    },
+    {
+      "s1_id": "S1-650051667",
+      "cand_id": "S2-920321218",
+      "score": 0.9985,
+      "s1_name": "jaipur health pvt ltd",
+      "cand_name": "\u0938\u0947\u0935\u0928 \u0939\u0947\u0932\u094d\u0925\u0915\u0947\u092f\u0930 \u092a\u094d\u0930\u093e \u0932\u093f",
+      "s1_addr": "c1304 anukampa platina jaipur rajasthan",
+      "cand_addr": "c1304 jaipur rajasthan"
+    },
+    {
+      "s1_id": "S1-650051667",
+      "cand_id": "S2-576560890",
+      "score": 0.981,
+      "s1_name": "jaipur health pvt ltd",
+      "cand_name": "\u091f\u0947\u0915 \u0917\u094d\u0932\u094b\u092c\u0932 \u092a\u094d\u0930\u093e \u0932\u093f",
+      "s1_addr": "c1304 anukampa platina jaipur rajasthan",
+      "cand_addr": "c1304 anukampa platina jaipur rajasthan"
+    },
+    {
+      "s1_id": "S1-650051667",
+      "cand_id": "S2-515213589",
+      "score": 0.981,
+      "s1_name": "jaipur health pvt ltd",
+      "cand_name": "\u091f\u0947\u0915 \u0917\u094d\u0932\u094b\u092c\u0932 \u092a\u094d\u0930\u093e \u0932\u093f",
+      "s1_addr": "c1304 anukampa platina jaipur rajasthan",
+      "cand_addr": "c1304 anukampa platina jaipur rajasthan"
+    },
+    {
+      "s1_id": "S1-650051667",
+      "cand_id": "S2-663717717",
+      "score": 0.9982,
+      "s1_name": "jaipur health pvt ltd",
+      "cand_name": "\u0938\u0947\u0935\u0928 \u0939\u0947\u0932\u094d\u0925\u0915\u0947\u092f\u0930 \u092a\u094d\u0930\u093e \u0932\u093f",
+      "s1_addr": "c1304 anukampa platina jaipur rajasthan",
+      "cand_addr": "c1304 anukampa platina jaipur rajasthan"
+    },
+    {
+      "s1_id": "S1-754155904",
+      "cand_id": "S2-264194527",
+      "score": 0.9936,
+      "s1_name": "kaverita auto private limited",
+      "cand_name": "\u0cb9 \u0c9f \u0cb2 \u0cb9 \u0c9f \u0cb2 \u0cb8 \u0cb2 \u0caf \u0cb7\u0ca8 \u0cb8 \u0caa \u0cb0 \u0cb5 \u0c9f \u0cb2 \u0cae \u0c9f \u0ca1",
+      "s1_addr": "62 1 new no 7 1st crs ganganagar bangalore north bangalore karnataka",
+      "cand_addr": "no 62 1 new no 7 1st cross ganga nagar bangalore north bangalore karnataka"
+    },
+    {
+      "s1_id": "S1-3754825",
+      "cand_id": "S2-578007335",
+      "score": 0.9617,
+      "s1_name": "behavioral health midwest associates",
+      "cand_name": "empire associatesdental",
+      "s1_addr": "212 1 2 33rd street billings mt",
+      "cand_addr": "mt billings 212 1 2 33st st"
+    },
+    {
+      "s1_id": "S1-760263717",
+      "cand_id": "S2-560372602",
+      "score": 0.9055,
+      "s1_name": "red pizza",
+      "cand_name": "red pizza",
+      "s1_addr": "14110 patricia lane alvin tx",
+      "cand_addr": "1100 bennett rd alvin tx"
+    },
+    {
+      "s1_id": "S1-531792127",
+      "cand_id": "S2-397695837",
+      "score": 0.9924,
+      "s1_name": "suj developers pvt ltd",
+      "cand_name": "new delhi developers pvt ltd",
+      "s1_addr": "new delhi delhi west delhi a 251 vikaspuri",
+      "cand_addr": "z 251 loha mandi naraina new delhi delhi"
+    },
+    {
+      "s1_id": "S1-199582884",
+      "cand_id": "S3-265537592",
+      "score": 0.9798,
+      "s1_name": "kochi marketing pvt ltd",
+      "cand_name": "united",
+      "s1_addr": "kochi 17 156 a3 kerala manassery fdwcs building ernakulam",
+      "cand_addr": "17 156 a3 kochi ernakulam kerala manassery fdwcs building"
+    },
+    {
+      "s1_id": "S1-199582884",
+      "cand_id": "S2-469282470",
+      "score": 0.9742,
+      "s1_name": "kochi marketing pvt ltd",
+      "cand_name": "\u0d2f \u0d23 \u0d31 \u0d31\u0d21 \u0d1f \u0d30 \u0d21 \u0d17",
+      "s1_addr": "kochi 17 156 a3 kerala manassery fdwcs building ernakulam",
+      "cand_addr": "17 156 a3 manassery fdwcs building ernakulam kochi kerala"
+    },
+    {
+      "s1_id": "S1-342547011",
+      "cand_id": "S2-815567403",
+      "score": 0.9975,
+      "s1_name": "cozy pizza clinic",
+      "cand_name": "deltaavi pizza clinic",
+      "s1_addr": "11023 siskin lane klamath falls or",
+      "cand_addr": "11023 siskin lane running y ranch or"
+    },
+    {
+      "s1_id": "S1-367564997",
+      "cand_id": "S2-163985328",
+      "score": 0.9615,
+      "s1_name": "ahmedabad holdings",
+      "cand_name": "ahmedabad holdings",
+      "s1_addr": "b 101 sidheshwari avenue i o c road chandkheda vill chandkheda tal gandh inagar ahmedabad gujarat",
+      "cand_addr": ""
+    },
+    {
+      "s1_id": "S1-572883797",
+      "cand_id": "S2-228339411",
+      "score": 0.9763,
+      "s1_name": "pune pharma private limited",
+      "cand_name": "pune pharma private limited",
+      "s1_addr": "paranjape schemes c pvt l avaneesh b c s no 7 1p 7 2 kothrud pune maharashtra",
+      "cand_addr": "door no 7 vasant complex g no 518 1 2 a p bhugaon tal mulsi pune maharashtra"
+    },
+    {
+      "s1_id": "S1-240217829",
+      "cand_id": "S2-124620808",
+      "score": 0.9937,
+      "s1_name": "camac trading private limited",
+      "cand_name": "\u092a\u094d\u0930\u093e\u0907\u092e \u092a\u093e\u0935\u0930 \u092a\u094d\u0930\u093e\u0907\u0935\u0947\u091f \u0932\u093f\u092e\u093f\u091f\u0947\u0921",
+      "s1_addr": "opp gala no 4 palghar vikramgad thane maharashtra",
+      "cand_addr": "office 4 thane maharashtra"
+    }
+  ],
+  "fn_examples": [
+    {
+      "s1_id": "S1-55344266",
+      "cand_id": "S3-384364074",
+      "retrieved": false,
+      "score": null,
+      "s1_name": "raj investments llp",
+      "cand_name": "",
+      "s1_addr": "6 29 c i t colony 2nd main road mylapore chennai tamil nadu",
+      "cand_addr": ""
+    },
+    {
+      "s1_id": "S1-55344266",
+      "cand_id": "S3-478195123",
+      "retrieved": false,
+      "score": null,
+      "s1_name": "raj investments llp",
+      "cand_name": "",
+      "s1_addr": "6 29 c i t colony 2nd main road mylapore chennai tamil nadu",
+      "cand_addr": ""
+    },
+    {
+      "s1_id": "S1-55344266",
+      "cand_id": "S2-197070651",
+      "retrieved": false,
+      "score": null,
+      "s1_name": "raj investments llp",
+      "cand_name": "",
+      "s1_addr": "6 29 c i t colony 2nd main road mylapore chennai tamil nadu",
+      "cand_addr": ""
+    },
+    {
+      "s1_id": "S1-55344266",
+      "cand_id": "S2-249013014",
+      "retrieved": false,
+      "score": null,
+      "s1_name": "raj investments llp",
+      "cand_name": "",
+      "s1_addr": "6 29 c i t colony 2nd main road mylapore chennai tamil nadu",
+      "cand_addr": ""
+    },
+    {
+      "s1_id": "S1-318373630",
+      "cand_id": "S2-660036492",
+      "retrieved": false,
+      "score": null,
+      "s1_name": "red ventures private limited",
+      "cand_name": "",
+      "s1_addr": "rajasthan jaipur banipark gokul apartment e3a kanti chandra road g1",
+      "cand_addr": ""
+    },
+    {
+      "s1_id": "S1-318373630",
+      "cand_id": "S3-804600254",
+      "retrieved": false,
+      "score": null,
+      "s1_name": "red ventures private limited",
+      "cand_name": "",
+      "s1_addr": "rajasthan jaipur banipark gokul apartment e3a kanti chandra road g1",
+      "cand_addr": ""
+    },
+    {
+      "s1_id": "S1-29845983",
+      "cand_id": "S2-648035184",
+      "retrieved": false,
+      "score": null,
+      "s1_name": "hendricks and flowers inc",
+      "cand_name": "",
+      "s1_addr": "33 sleepy hollow drive danbury ct",
+      "cand_addr": ""
+    },
+    {
+      "s1_id": "S1-29845983",
+      "cand_id": "S3-588502663",
+      "retrieved": false,
+      "score": null,
+      "s1_name": "hendricks and flowers inc",
+      "cand_name": "",
+      "s1_addr": "33 sleepy hollow drive danbury ct",
+      "cand_addr": ""
+    },
+    {
+      "s1_id": "S1-145361722",
+      "cand_id": "S2-120366543",
+      "retrieved": false,
+      "score": null,
+      "s1_name": "dick regional armada corp",
+      "cand_name": "",
+      "s1_addr": "33466 warwick hills road yucaipa ca",
+      "cand_addr": ""
+    },
+    {
+      "s1_id": "S1-145361722",
+      "cand_id": "S3-96572514",
+      "retrieved": false,
+      "score": null,
+      "s1_name": "dick regional armada corp",
+      "cand_name": "",
+      "s1_addr": "33466 warwick hills road yucaipa ca",
+      "cand_addr": ""
+    },
+    {
+      "s1_id": "S1-145361722",
+      "cand_id": "S2-939389287",
+      "retrieved": false,
+      "score": null,
+      "s1_name": "dick regional armada corp",
+      "cand_name": "",
+      "s1_addr": "33466 warwick hills road yucaipa ca",
+      "cand_addr": ""
+    },
+    {
+      "s1_id": "S1-503957000",
+      "cand_id": "S2-994658326",
+      "retrieved": false,
+      "score": null,
+      "s1_name": "ap hospitality inc",
+      "cand_name": "",
+      "s1_addr": "20085 us 23 circleville oh",
+      "cand_addr": ""
+    },
+    {
+      "s1_id": "S1-503957000",
+      "cand_id": "S2-353308450",
+      "retrieved": false,
+      "score": null,
+      "s1_name": "ap hospitality inc",
+      "cand_name": "",
+      "s1_addr": "20085 us 23 circleville oh",
+      "cand_addr": ""
+    },
+    {
+      "s1_id": "S1-503957000",
+      "cand_id": "S2-235117490",
+      "retrieved": false,
+      "score": null,
+      "s1_name": "ap hospitality inc",
+      "cand_name": "",
+      "s1_addr": "20085 us 23 circleville oh",
+      "cand_addr": ""
+    },
+    {
+      "s1_id": "S1-503957000",
+      "cand_id": "S3-555791452",
+      "retrieved": false,
+      "score": null,
+      "s1_name": "ap hospitality inc",
+      "cand_name": "",
+      "s1_addr": "20085 us 23 circleville oh",
+      "cand_addr": ""
+    },
+    {
+      "s1_id": "S1-503957000",
+      "cand_id": "S3-858763214",
+      "retrieved": false,
+      "score": null,
+      "s1_name": "ap hospitality inc",
+      "cand_name": "",
+      "s1_addr": "20085 us 23 circleville oh",
+      "cand_addr": ""
+    },
+    {
+      "s1_id": "S1-503957000",
+      "cand_id": "S2-173295926",
+      "retrieved": false,
+      "score": null,
+      "s1_name": "ap hospitality inc",
+      "cand_name": "",
+      "s1_addr": "20085 us 23 circleville oh",
+      "cand_addr": ""
+    },
+    {
+      "s1_id": "S1-503957000",
+      "cand_id": "S3-33665521",
+      "retrieved": false,
+      "score": null,
+      "s1_name": "ap hospitality inc",
+      "cand_name": "",
+      "s1_addr": "20085 us 23 circleville oh",
+      "cand_addr": ""
+    },
+    {
+      "s1_id": "S1-65263544",
+      "cand_id": "S3-102573485",
+      "retrieved": false,
+      "score": null,
+      "s1_name": "caldeon nova",
+      "cand_name": "",
+      "s1_addr": "1 greenbrier drive kimberling city mo",
+      "cand_addr": ""
+    },
+    {
+      "s1_id": "S1-65263544",
+      "cand_id": "S3-350074034",
+      "retrieved": false,
+      "score": null,
+      "s1_name": "caldeon nova",
+      "cand_name": "",
+      "s1_addr": "1 greenbrier drive kimberling city mo",
+      "cand_addr": ""
+    },
+    {
+      "s1_id": "S1-65263544",
+      "cand_id": "S2-881122703",
+      "retrieved": false,
+      "score": null,
+      "s1_name": "caldeon nova",
+      "cand_name": "",
+      "s1_addr": "1 greenbrier drive kimberling city mo",
+      "cand_addr": ""
+    },
+    {
+      "s1_id": "S1-65263544",
+      "cand_id": "S2-180463458",
+      "retrieved": false,
+      "score": null,
+      "s1_name": "caldeon nova",
+      "cand_name": "",
+      "s1_addr": "1 greenbrier drive kimberling city mo",
+      "cand_addr": ""
+    },
+    {
+      "s1_id": "S1-65263544",
+      "cand_id": "S2-998270769",
+      "retrieved": false,
+      "score": null,
+      "s1_name": "caldeon nova",
+      "cand_name": "",
+      "s1_addr": "1 greenbrier drive kimberling city mo",
+      "cand_addr": ""
+    },
+    {
+      "s1_id": "S1-65263544",
+      "cand_id": "S3-403476502",
+      "retrieved": false,
+      "score": null,
+      "s1_name": "caldeon nova",
+      "cand_name": "",
+      "s1_addr": "1 greenbrier drive kimberling city mo",
+      "cand_addr": ""
+    },
+    {
+      "s1_id": "S1-840162906",
+      "cand_id": "S2-129529678",
+      "retrieved": false,
+      "score": null,
+      "s1_name": "summit health llc",
+      "cand_name": "",
+      "s1_addr": "95 forest edge drive eads tn",
+      "cand_addr": ""
+    },
+    {
+      "s1_id": "S1-840162906",
+      "cand_id": "S3-139858754",
+      "retrieved": false,
+      "score": null,
+      "s1_name": "summit health llc",
+      "cand_name": "",
+      "s1_addr": "95 forest edge drive eads tn",
+      "cand_addr": ""
+    },
+    {
+      "s1_id": "S1-840162906",
+      "cand_id": "S3-762681944",
+      "retrieved": false,
+      "score": null,
+      "s1_name": "summit health llc",
+      "cand_name": "",
+      "s1_addr": "95 forest edge drive eads tn",
+      "cand_addr": ""
+    },
+    {
+      "s1_id": "S1-840162906",
+      "cand_id": "S3-799520471",
+      "retrieved": false,
+      "score": null,
+      "s1_name": "summit health llc",
+      "cand_name": "",
+      "s1_addr": "95 forest edge drive eads tn",
+      "cand_addr": ""
+    },
+    {
+      "s1_id": "S1-840162906",
+      "cand_id": "S3-800978181",
+      "retrieved": false,
+      "score": null,
+      "s1_name": "summit health llc",
+      "cand_name": "",
+      "s1_addr": "95 forest edge drive eads tn",
+      "cand_addr": ""
+    },
+    {
+      "s1_id": "S1-525304403",
+      "cand_id": "S2-293401164",
+      "retrieved": false,
+      "score": null,
+      "s1_name": "true factory ltd",
+      "cand_name": "",
+      "s1_addr": "c o sri g p srivastva at idagah mohall dehrions dehri rohtas bihar",
+      "cand_addr": ""
+    }
+  ]
+}

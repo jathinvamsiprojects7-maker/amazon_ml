@@ -1,5 +1,5 @@
 """
-Amazon ML Challenge 2026 — Memory-Safe Pipeline Runner
+Amazon ML Challenge 2026 â€” Memory-Safe Pipeline Runner
 Target: keep total system RAM <= 70% (~10.9 GB on 15.6 GB machine)
 
 Memory strategy:
@@ -127,9 +127,9 @@ def compute_features_memmap(
                   f"{rate:.0f} pairs/s  ETA {eta/60:.1f}m")
             m = psutil.virtual_memory()
             if m.percent > 72:
-                fp.flush()
+                print(f"  WARNING: RAM at {m.percent:.1f}% -- continuing without forced flush")
 
-    fp.flush()
+    # Close the memmap once after all rows have been computed.
     del fp
     gc.collect()
     result = np.lib.format.open_memmap(
@@ -216,7 +216,17 @@ def main():
     # =========================================================================
     banner("STAGE 3: Candidate generation")
 
-    rcfg = cfg["retrieval"]
+    # Retrieval configuration: tolerate missing keys in older config files.
+    # Safe defaults for the fast training run.
+    rcfg = dict(cfg.get("retrieval", {}))
+    rcfg.setdefault("rare_token_min_len", 4)
+    rcfg.setdefault("rare_token_max_df", 100)
+    rcfg.setdefault("ngram_size", 3)
+    rcfg.setdefault("ngram_max_features", 30000)
+    rcfg.setdefault("ngram_top_k", 10)
+    rcfg.setdefault("max_bucket_size", 100)
+    rcfg.setdefault("retrieval_chunk_size", 2000)
+    rcfg.setdefault("ngram_batch_size", 1000)
     cache_dir = p["cache_dir"]
 
     cand_s2_path  = cache_dir / "train_candidates_s2.parquet"
@@ -240,9 +250,9 @@ def main():
             idx_s2 = SourceIndex("S2")
             idx_s2.build_from_parquet(
                 s2_norm_parquet,
-                rare_token_min_len=rcfg["rare_token_min_len"],
-                rare_token_max_df=rcfg["rare_token_max_df"],
-                ngram_n=rcfg["ngram_size"],
+                rare_token_min_len=rcfg.get("rare_token_min_len", 4),
+                rare_token_max_df=rcfg.get("rare_token_max_df", 100),
+                ngram_n=rcfg.get("ngram_size", 3),
                 ngram_max_features=rcfg.get("ngram_max_features", 30000),
             )
             mem_report("after S2 index build")
@@ -253,8 +263,8 @@ def main():
                     s1_train, idx_s2, cand_s2_path,
                     chunk_size=rcfg.get("retrieval_chunk_size", 5000),
                     ngram_batch_size=rcfg.get("ngram_batch_size", 2000),
-                    ngram_top_k=rcfg["ngram_top_k"],
-                    max_bucket=rcfg["max_bucket_size"],
+                    ngram_top_k=rcfg.get("ngram_top_k", 10),
+                    max_bucket=rcfg.get("max_bucket_size", 100),
                 )
             del idx_s2
             gc.collect()
@@ -269,9 +279,9 @@ def main():
             idx_s3 = SourceIndex("S3")
             idx_s3.build_from_parquet(
                 s3_norm_parquet,
-                rare_token_min_len=rcfg["rare_token_min_len"],
-                rare_token_max_df=rcfg["rare_token_max_df"],
-                ngram_n=rcfg["ngram_size"],
+                rare_token_min_len=rcfg.get("rare_token_min_len", 4),
+                rare_token_max_df=rcfg.get("rare_token_max_df", 100),
+                ngram_n=rcfg.get("ngram_size", 3),
                 ngram_max_features=rcfg.get("ngram_max_features", 30000),
             )
             mem_report("after S3 index build")
@@ -282,8 +292,8 @@ def main():
                     s1_train, idx_s3, cand_s3_path,
                     chunk_size=rcfg.get("retrieval_chunk_size", 5000),
                     ngram_batch_size=rcfg.get("ngram_batch_size", 2000),
-                    ngram_top_k=rcfg["ngram_top_k"],
-                    max_bucket=rcfg["max_bucket_size"],
+                    ngram_top_k=rcfg.get("ngram_top_k", 10),
+                    max_bucket=rcfg.get("max_bucket_size", 100),
                 )
             del idx_s3
             gc.collect()
@@ -357,18 +367,53 @@ def main():
     feat_meta = cache_dir / "train_features.meta.json"
 
     need_feats = True
-    if feat_path.exists() and feat_meta.exists():
-        meta = json.loads(feat_meta.read_text(encoding="utf-8"))
-        if meta.get("n_pairs") == len(candidates_df) and meta.get("n_features") == N_FEATURES:
-            print(f"  Feature cache valid: {len(candidates_df):,} x {N_FEATURES}")
-            X_all = np.lib.format.open_memmap(
-                str(feat_path), mode="r", dtype=np.float32,
-                shape=(len(candidates_df), N_FEATURES),
-            )
-            need_feats = False
-        else:
-            print("  Feature cache stale -- recomputing")
-            feat_path.unlink(missing_ok=True)
+
+    # Reuse a completed feature file even if the previous run was interrupted
+    # while flushing it. This avoids another 15-20 minute recomputation.
+    if feat_meta.exists() and feat_path.exists():
+        try:
+            meta = json.loads(feat_meta.read_text(encoding="utf-8"))
+            if (meta.get("n_pairs") == len(candidates_df)
+                    and meta.get("n_features") == N_FEATURES):
+                X_all = np.lib.format.open_memmap(str(feat_path), mode="r")
+                if X_all.shape == (len(candidates_df), N_FEATURES):
+                    print(f"  Feature cache valid: {len(candidates_df):,} x {N_FEATURES}")
+                    need_feats = False
+                else:
+                    del X_all
+        except Exception as e:
+            print(f"  Feature metadata check failed: {e}")
+
+    # Recovery path for the previous run: feature computation reached 100%
+    # and was interrupted during fp.flush(). Validate the .npy header/shape
+    # and sample rows, then reuse it instead of recomputing.
+    if need_feats and feat_path.exists():
+        try:
+            candidate_mm = np.lib.format.open_memmap(str(feat_path), mode="r")
+            expected_shape = (len(candidates_df), N_FEATURES)
+            if candidate_mm.shape == expected_shape and candidate_mm.dtype == np.float32:
+                sample_rows = np.unique(np.array(
+                    [0, len(candidates_df) // 2, len(candidates_df) - 1],
+                    dtype=np.int64,
+                ))
+                sample = np.asarray(candidate_mm[sample_rows])
+                if np.isfinite(sample).all() and np.any(np.abs(sample) > 0):
+                    X_all = candidate_mm
+                    feat_meta.write_text(json.dumps({
+                        "n_pairs": len(candidates_df),
+                        "n_features": N_FEATURES,
+                        "feature_names": FEATURE_NAMES,
+                        "recovered": True,
+                    }), encoding="utf-8")
+                    print(f"  Recovered feature cache: {len(candidates_df):,} x {N_FEATURES}")
+                    print("  Skipping feature recomputation.")
+                    need_feats = False
+                else:
+                    del candidate_mm
+            else:
+                del candidate_mm
+        except Exception as e:
+            print(f"  Existing feature file is not reusable: {e}")
 
     if need_feats:
         with Timer("compute features"):
@@ -661,7 +706,12 @@ def main():
     # =========================================================================
     banner("STAGE 12: Validation summary")
 
-    final_preds  = apply_threshold(val_cands_df, best_scores, cur_threshold, list(val_s1_set))
+    final_preds  = {
+        s1_id: set(candidate_ids)
+        for s1_id, candidate_ids in apply_threshold(
+            val_cands_df, best_scores, cur_threshold, list(val_s1_set)
+        ).items()
+    }
     gt_val       = {s1: set(v) for s1, v in gt.items() if s1 in val_s1_set}
     val_metrics  = macro_f05(final_preds, gt_val)
     print(f"  Model:       {best_name}")
@@ -720,9 +770,9 @@ def main():
             tidx_s2 = SourceIndex("S2")
             tidx_s2.build_from_parquet(
                 s2_test_norm,
-                rare_token_min_len=rcfg["rare_token_min_len"],
-                rare_token_max_df=rcfg["rare_token_max_df"],
-                ngram_n=rcfg["ngram_size"],
+                rare_token_min_len=rcfg.get("rare_token_min_len", 4),
+                rare_token_max_df=rcfg.get("rare_token_max_df", 100),
+                ngram_n=rcfg.get("ngram_size", 3),
                 ngram_max_features=rcfg.get("ngram_max_features", 30000),
             )
             mem_report("after test S2 index")
@@ -731,8 +781,8 @@ def main():
                     s1_test, tidx_s2, test_s2_path,
                     chunk_size=rcfg.get("retrieval_chunk_size", 5000),
                     ngram_batch_size=rcfg.get("ngram_batch_size", 2000),
-                    ngram_top_k=rcfg["ngram_top_k"],
-                    max_bucket=rcfg["max_bucket_size"],
+                    ngram_top_k=rcfg.get("ngram_top_k", 10),
+                    max_bucket=rcfg.get("max_bucket_size", 100),
                 )
             del tidx_s2; gc.collect()
             mem_report("after test S2 retrieval")
@@ -742,9 +792,9 @@ def main():
             tidx_s3 = SourceIndex("S3")
             tidx_s3.build_from_parquet(
                 s3_test_norm,
-                rare_token_min_len=rcfg["rare_token_min_len"],
-                rare_token_max_df=rcfg["rare_token_max_df"],
-                ngram_n=rcfg["ngram_size"],
+                rare_token_min_len=rcfg.get("rare_token_min_len", 4),
+                rare_token_max_df=rcfg.get("rare_token_max_df", 100),
+                ngram_n=rcfg.get("ngram_size", 3),
                 ngram_max_features=rcfg.get("ngram_max_features", 30000),
             )
             mem_report("after test S3 index")
@@ -753,8 +803,8 @@ def main():
                     s1_test, tidx_s3, test_s3_path,
                     chunk_size=rcfg.get("retrieval_chunk_size", 5000),
                     ngram_batch_size=rcfg.get("ngram_batch_size", 2000),
-                    ngram_top_k=rcfg["ngram_top_k"],
-                    max_bucket=rcfg["max_bucket_size"],
+                    ngram_top_k=rcfg.get("ngram_top_k", 10),
+                    max_bucket=rcfg.get("max_bucket_size", 100),
                 )
             del tidx_s3; gc.collect()
             mem_report("after test S3 retrieval")

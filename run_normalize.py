@@ -17,6 +17,8 @@ import sys
 import time
 from pathlib import Path
 
+import pyarrow.parquet as pq
+
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 from src.data_loader import load_source_cached, NORMALIZATION_VERSION
@@ -37,9 +39,10 @@ def main() -> None:
     for split, source in jobs:
         print(f"\n=== {split} {source} ===", flush=True)
         t0 = time.perf_counter()
-        df = load_source_cached(split, source)
-        rows = len(df)
-        del df
+        df = load_source_cached(split, source, load_data=False)
+        rows = pq.ParquetFile(
+            str(Path("D:/amazon_ml/cache") / f"{split}_{source}_norm.parquet")
+        ).metadata.num_rows
         g.gc()
         print(f"  done {split}_{source}: {rows:,} rows in "
               f"{time.perf_counter()-t0:.0f}s | {g.status()}", flush=True)

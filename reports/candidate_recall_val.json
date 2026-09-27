@@ -1,0 +1,11 @@
+{
+  "candidate_recall": 0.004489,
+  "total_gt_positives": 1145244,
+  "total_recalled": 5141,
+  "n_s1_with_matches": 312535,
+  "mean_candidates_per_s1": 2.0,
+  "p50_candidates": 0,
+  "p95_candidates": 0,
+  "p99_candidates": 8,
+  "total_pairs": 651429
+}

@@ -13,13 +13,12 @@ paths:
 # machine: Windows + shell + Python + background services), not of this
 # process. 0.80 is the hard ceiling and must not be exceeded.
 resources:
-  ram_ceiling: 0.80        # total system RAM must stay <= 80%
-  cpu_fraction: 0.78       # total system CPU must stay <= ~78%
-  disk_min_free_fraction: 0.20   # keep >= 20% of D: free
-  max_workers: 9           # <= 78% of 12 logical cores
-
+  ram_ceiling: 0.75
+  cpu_fraction: 0.70
+  disk_min_free_fraction: 0.20
+  max_workers: 4
 data:
-  chunk_size: 400000
+  chunk_size: 100000
   id_dtype: "string"
   encoding: "utf-8-sig"
 
@@ -36,19 +35,20 @@ retrieval:
   exact_address: true
   address_digits: true
   rare_token: true
-  # Operating point chosen from the measured recall/volume curve in
-  # reports/union_budget_recall.json. per_s1 bounds the candidates kept per
-  # S1 per source; exact_cap/digit_cap bound the two high-volume exact
-  # channels (digits alone reach p95 ~24k/S1 and would otherwise consume the
-  # whole budget before any discriminative token evidence is used).
+
   per_s1: 1000
   exact_cap: 200
   digit_cap: 200
   max_token_df: 1000
   min_token_len: 3
-  retrieval_chunk_size: 50000
-  batch_size: 1000000
 
+  # Lower memory usage
+  retrieval_chunk_size: 10000
+  ngram_batch_size: 50000
+  batch_size: 50000
+  rare_token_min_len: 4
+  rare_token_max_df: 100
+  ngram_size: 3
 training:
   val_fraction: 0.15
   random_seed: 20260925
@@ -82,4 +82,4 @@ model:
 threshold:
   search_min: 0.05
   search_max: 0.95
-  search_steps: 100
+  search_steps: 20

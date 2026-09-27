@@ -71,7 +71,11 @@ def _write_meta(cache_dir: Path, name: str, source_hash: str, rows: int) -> None
     )
 
 
-def load_source_cached(split: str, source: str) -> pd.DataFrame:
+def load_source_cached(
+    split: str,
+    source: str,
+    load_data: bool = True,
+) -> pd.DataFrame | None:
     """
     Load a source TSV with normalization applied, using Parquet cache.
     split: 'train' or 'test'
@@ -91,6 +95,9 @@ def load_source_cached(split: str, source: str) -> pd.DataFrame:
     fingerprint = _cache_fingerprint(src_hash)
 
     if _cache_valid(cache_dir, name, fingerprint):
+        if not load_data:
+            print(f"  [cache hit] {name}: metadata validated")
+            return None
         with Timer(f"load cached {name}"):
             df = pq.read_table(_cache_path(cache_dir, name)).to_pandas()
         print(f"  [cache hit] {name}: {len(df):,} rows")
@@ -158,6 +165,8 @@ def load_source_cached(split: str, source: str) -> pd.DataFrame:
     size_mb = out_path.stat().st_size / 1e6
     print(f"  [cached] {name}: {n_rows:,} rows -> {out_path.name} ({size_mb:.1f} MB)")
 
+    if not load_data:
+        return None
     return pq.read_table(out_path).to_pandas()
 
 
